@@ -6,6 +6,7 @@ public abstract class Combattant {
 	
 	private int ptsVie;
 	private int ptsMana;
+	
 	private final int ptsVieMax;
 	
 	public int getPtsVie() {
@@ -54,10 +55,21 @@ public abstract class Combattant {
 		this.ptsVieMax = ptsVieMax;
 	}
 
+	/**
+	 * Fait crier un combattant.
+	 */
 	public abstract void crier();
 	
-	public abstract void action(Combattant victime);
+	/**
+	 * Fait agir le combattant sur un autre combattant.
+	 * @param cible Le combattant qui va subir l'action
+	 */
+	public abstract void action(Combattant cible);
 	
+	/**
+	 * Réduit les points de vie du combattant.
+	 * @param degats Le montant de points de vie à déduire
+	 */
 	public void subir(int degats) {
 		System.out.println(String.format("%s subit %d points de dégâts !", this.getPrenom(), degats));
 		this.ptsVie -= degats;
@@ -67,6 +79,9 @@ public abstract class Combattant {
 		}
 	}
 	
+	/**
+	 * Affiche les stats globales du combattant.
+	 */
 	public void status() {
 		System.out.println(String.format("Nom : %s", this.nom));
 		System.out.println(String.format("Prénom : %s", this.prenom));

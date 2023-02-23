@@ -18,9 +18,9 @@ public class Mage extends Combattant implements Berserker, Healer {
 	}
 
 	@Override
-	public void action(Combattant victime) {
+	public void action(Combattant cible) {
 		if (getPtsVie() > getPtsVieMax() / 2) {
-			attaquer(victime);
+			attaquer(cible);
 		} else {
 			soigner();
 		}
