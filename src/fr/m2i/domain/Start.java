@@ -18,20 +18,48 @@ public class Start {
 		};
 		
 		// Choisit les deux combattants qui vont se battre
-		int premier = (int)(Math.random() * 5);
+		Combattant[] duelistes = choixCombattants(combattants);
+
+		// Les deux combattants de battent
+		Combattant vainqueur = combat(duelistes[0], duelistes[1], 20);
+		
+		// Affiche le vainqueur
+		afficherVainqueur(vainqueur);
+	}
+	
+	/**
+	 * Choisit deux combattants parmi une liste de combattants.
+	 * @param combattants Une liste de combattants
+	 * @return Deux combattants
+	 */
+	public static Combattant[] choixCombattants(Combattant[] combattants) {
+		Combattant[] duelistes = new Combattant[2];
+		int premier = (int)(Math.random() * combattants.length);
 		int deuxieme = -1;
 		do {
-			deuxieme = (int)(Math.random() * 5);
+			deuxieme = (int)(Math.random() * combattants.length);
 		} while (deuxieme == premier);
 		
-		Combattant combattant1 = combattants[premier];
-		Combattant combattant2 = combattants[deuxieme];
-
-		// Les deux combattants se battent jusqu'à ce qu'un des deux n'ait plus de points de vie
-		// ou pendant 20 tours maximums. Le premier combattant choisit commence.
+		duelistes[0] = combattants[premier];
+		duelistes[1] = combattants[deuxieme];
+		return duelistes;
+	}
+	
+	/**
+	 * Fait se combattre deux combattants.
+	 * 
+	 * Les deux combattants se battent jusqu'à ce qu'un des deux n'ait plus de points de vie
+	 * ou pendant 20 tours maximums. Le premier combattant choisit commence.
+	 * 
+	 * @param combattant1 Le premier combattant
+	 * @param combattant2 Le deuxième combattant
+	 * @param toursMax Le nombre de tour maximum
+	 * @return Le combattant qui a le plus de points de vie à la fin du combat
+	 */
+	public static Combattant combat(Combattant combattant1, Combattant combattant2, int toursMax) {
 		System.out.println(String.format("%s vs %s !", combattant1.getPrenom(), combattant2.getPrenom()));
 		int tour = 0;
-		while (combattant1.getPtsVie() > 0 && combattant2.getPtsVie() > 0 && tour < 20) {
+		while (combattant1.getPtsVie() > 0 && combattant2.getPtsVie() > 0 && tour < toursMax) {
 			if (tour % 2 == 0) {
 				combattant1.action(combattant2);
 			} else {
@@ -39,9 +67,14 @@ public class Start {
 			}
 			tour++;
 		}
-		
-		// Affiche le vainqueur
-		Combattant vainqueur = combattant1.getPtsVie() > 0 ? combattant1 : combattant2;
+		return combattant1.getPtsVie() > 0 ? combattant1 : combattant2;
+	}
+	
+	/**
+	 * Affiche le vainqueur du combat.
+	 * @param vainqueur Le combattant qui a remporté la victoire
+	 */
+	public static void afficherVainqueur(Combattant vainqueur) {
 		System.out.println(String.format("%s a gagné !", vainqueur.getPrenom()));
 	}
 	
