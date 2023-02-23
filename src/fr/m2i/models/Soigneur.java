@@ -2,8 +2,8 @@ package fr.m2i.models;
 
 public class Soigneur extends Combattant implements Healer {
 	
-	public Soigneur(String nom, String prenom) {
-		super(nom, prenom, 70, 150, 70);
+	public Soigneur(String nom, String prenom, String race) {
+		super(nom, prenom, race, 70, 150, 70);
 	}
 	
 	@Override

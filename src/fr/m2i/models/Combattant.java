@@ -3,7 +3,8 @@ package fr.m2i.models;
 public abstract class Combattant {
 	private final String nom;
 	private final String prenom;
-	
+	private final String race;
+
 	private int ptsVie;
 	private int ptsMana;
 	
@@ -38,18 +39,23 @@ public abstract class Combattant {
 	public String getPrenom() {
 		return prenom;
 	}
+	
+	public String getRace() {
+		return race;
+	}
 
 	public Combattant() {
-		this("Au bataillon", "Inconnu", 100, 0, 100);
+		this("Au bataillon", "Inconnu", "humain", 100, 0, 100);
 	}
 	
 	public Combattant(String nom, String prenom) {
-		this(nom, prenom, 100, 0, 100);
+		this(nom, prenom, "humain", 100, 0, 100);
 	}
 	
-	public Combattant(String nom, String prenom, int ptsVie, int ptsMana, int ptsVieMax) {
+	public Combattant(String nom, String prenom, String race, int ptsVie, int ptsMana, int ptsVieMax) {
 		this.nom = nom;
 		this.prenom = prenom;
+		this.race = race;
 		this.ptsVie = ptsVie;
 		this.ptsMana = ptsMana;
 		this.ptsVieMax = ptsVieMax;

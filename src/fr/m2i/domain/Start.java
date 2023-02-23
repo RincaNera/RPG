@@ -10,11 +10,11 @@ public class Start {
 	public static void main(String[] args) {
 		// Instancie 5 combattants
 		Combattant[] combattants = {
-				new Guerrier("Hurlenfer", "Garrosh"),
-				new Mage("Proudmore", "Jaina"),
-				new Soigneur("Wrynn", "Anduin"),
-				new Guerrier("Barbe-de-Bronze", "Magni"),
-				new Mage("Haut-Soleil", "Kael'Thas")
+				new Guerrier("Hurlenfer", "Garrosh", "Orc"),
+				new Mage("Proudmore", "Jaina", "Humain"),
+				new Soigneur("Wrynn", "Anduin", "Humain"),
+				new Guerrier("Barbe-de-Bronze", "Magni", "Nain"),
+				new Mage("Haut-Soleil", "Kael'Thas", "Elfe")
 		};
 		
 		// Choisit les deux combattants qui vont se battre

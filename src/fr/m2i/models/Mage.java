@@ -2,8 +2,8 @@ package fr.m2i.models;
 
 public class Mage extends Combattant implements Berserker, Healer {
 	
-	public Mage(String nom, String prenom) {
-		super(nom, prenom, 100, 100, 100);
+	public Mage(String nom, String prenom, String race) {
+		super(nom, prenom, race, 100, 100, 100);
 	}
 	
 	@Override

@@ -2,8 +2,8 @@ package fr.m2i.models;
 
 public class Guerrier extends Combattant implements Berserker {
 	
-	public Guerrier(String nom, String prenom) {
-		super(nom, prenom, 150, 50, 150);
+	public Guerrier(String nom, String prenom, String race) {
+		super(nom, prenom, race, 150, 50, 150);
 	}
 	
 	@Override
