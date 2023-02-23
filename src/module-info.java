@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author POEI
+ *
+ */
+module RPG {
+}
