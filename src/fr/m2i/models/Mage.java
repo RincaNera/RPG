@@ -1,5 +1,7 @@
 package fr.m2i.models;
 
+import fr.m2i.exceptions.DeadException;
+
 public class Mage extends Combattant implements Berserker, Healer {
 	
 	public Mage(String nom, String prenom, String race) {
@@ -18,7 +20,11 @@ public class Mage extends Combattant implements Berserker, Healer {
 	}
 
 	@Override
-	public void action(Combattant cible) {
+	public void action(Combattant cible) throws DeadException {
+		if(this.getPtsVie() <=0) {
+			throw new DeadException(String.format("%s est déjà mort !", this.getPrenom()));
+		}
+		
 		if (getPtsVie() > getPtsVieMax() / 2) {
 			attaquer(cible);
 		} else {
@@ -27,7 +33,7 @@ public class Mage extends Combattant implements Berserker, Healer {
 	}
 
 	@Override
-	public void attaquer(Combattant victime) {
+	public void attaquer(Combattant victime) throws DeadException {
 		crier();
 		victime.subir(15);
 	}

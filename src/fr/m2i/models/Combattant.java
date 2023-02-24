@@ -1,5 +1,7 @@
 package fr.m2i.models;
 
+import fr.m2i.exceptions.DeadException;
+
 public abstract class Combattant {
 	private final String nom;
 	private final String prenom;
@@ -69,20 +71,27 @@ public abstract class Combattant {
 	/**
 	 * Fait agir le combattant sur un autre combattant.
 	 * @param cible Le combattant qui va subir l'action
+	 * @throws DeadException 
 	 */
-	public abstract void action(Combattant cible);
+	public abstract void action(Combattant cible) throws DeadException;
 	
 	/**
 	 * Réduit les points de vie du combattant.
 	 * @param degats Le montant de points de vie à déduire
+	 * @throws DeadException 
 	 */
-	public void subir(int degats) {
+	public void subir(int degats) throws DeadException {
+		if(this.ptsVie <=0) {
+			throw new DeadException(String.format("%s est déjà mort !", this.prenom));
+		}
+		
 		System.out.println(String.format("%s subit %d points de dégâts !", this.getPrenom(), degats));
 		this.ptsVie -= degats;
 		System.out.println(String.format("%s a %d points de vie.", this.getPrenom(), this.getPtsVie()));
 		if (this.ptsVie <= 0) {
 			System.out.println(String.format("%s est mort !", this.prenom));
 		}
+		
 	}
 	
 	/**
@@ -94,4 +103,5 @@ public abstract class Combattant {
 		System.out.println(String.format("Points de vie : %d", this.ptsVie));
 		System.out.println(String.format("Points de mana : %d", this.ptsMana));
 	}
+
 }

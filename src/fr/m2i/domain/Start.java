@@ -1,5 +1,6 @@
 package fr.m2i.domain;
 
+import fr.m2i.exceptions.DeadException;
 import fr.m2i.models.Combattant;
 import fr.m2i.models.Guerrier;
 import fr.m2i.models.Mage;
@@ -21,7 +22,7 @@ public class Start {
 		Combattant[] duelistes = choixCombattants(combattants);
 
 		// Les deux combattants de battent
-		Combattant vainqueur = combat(duelistes[0], duelistes[1], 20);
+		Combattant vainqueur = combat(duelistes[0], duelistes[1], 100);
 		
 		// Affiche le vainqueur
 		afficherVainqueur(vainqueur);
@@ -59,13 +60,18 @@ public class Start {
 	public static Combattant combat(Combattant combattant1, Combattant combattant2, int toursMax) {
 		System.out.println(String.format("%s vs %s !", combattant1.getPrenom(), combattant2.getPrenom()));
 		int tour = 0;
-		while (combattant1.getPtsVie() > 0 && combattant2.getPtsVie() > 0 && tour < toursMax) {
-			if (tour % 2 == 0) {
-				combattant1.action(combattant2);
-			} else {
-				combattant2.action(combattant1);
+		
+		try {
+			while (/*combattant1.getPtsVie() > 0 && combattant2.getPtsVie() > 0 &&*/ tour < toursMax) {
+				if (tour % 2 == 0) {
+					combattant1.action(combattant2);
+				} else {
+					combattant2.action(combattant1);
+				}
+				tour++;
 			}
-			tour++;
+		}catch(DeadException e) {
+			System.out.println(e.getMessage());
 		}
 		return combattant1.getPtsVie() > 0 ? combattant1 : combattant2;
 	}

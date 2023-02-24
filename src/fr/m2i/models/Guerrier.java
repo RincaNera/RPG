@@ -1,5 +1,7 @@
 package fr.m2i.models;
 
+import fr.m2i.exceptions.DeadException;
+
 public class Guerrier extends Combattant implements Berserker {
 	
 	public Guerrier(String nom, String prenom, String race) {
@@ -12,14 +14,17 @@ public class Guerrier extends Combattant implements Berserker {
 	}
 	
 	@Override
-	public void action(Combattant victime) {
+	public void action(Combattant victime) throws DeadException {
+		if(this.getPtsVie() <=0) {
+			throw new DeadException(String.format("%s est déjà mort !", this.getPrenom()));
+		}
 		attaquer(victime);
 	}
 
 	@Override
-	public void attaquer(Combattant victime) {
+	public void attaquer(Combattant victime) throws DeadException {
 		crier();
-		victime.subir(25);
+			victime.subir(25);
 	}
 	
 }

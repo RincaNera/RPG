@@ -1,5 +1,7 @@
 package fr.m2i.models;
 
+import fr.m2i.exceptions.DeadException;
+
 public class Soigneur extends Combattant implements Healer {
 	
 	public Soigneur(String nom, String prenom, String race) {
@@ -12,7 +14,10 @@ public class Soigneur extends Combattant implements Healer {
 	}
 
 	@Override
-	public void action(Combattant victime) {
+	public void action(Combattant victime) throws DeadException {
+		if(this.getPtsVie() <=0) {
+			throw new DeadException(String.format("%s est déjà mort !", this.getPrenom()));
+		}
 		soigner();
 	}
 
